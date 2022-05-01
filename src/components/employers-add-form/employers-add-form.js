@@ -6,28 +6,40 @@ class EmployersAddForm extends Component {
         super(props)
         this.state = {
             name: '',
-            salary: ''
+            salary: '',
+            txt: 'Добавить'
         }
+        
     }
-
+    
     onChangeValue = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
+    
     onSubmit = (e) => {
         e.preventDefault();
+
+        if (this.state.name.length < 3 || !this.state.salary) {
+            this.setState({
+                txt: 'Введите имя и зарплату'
+            })
+            return;
+        }
         this.props.onAdd(this.state.name, this.state.salary);
         this.setState({
             name: '',
-            salary: ''
+            salary: '',
+            txt: 'Добавить'
         })
     }
 
-   render() {
-       const {name, salary} = this.state
+    
 
+   render() {
+       const {name, salary, txt} = this.state
     return (
         <div className="app-add-form"
         onSubmit = {this.onSubmit}>
@@ -48,7 +60,7 @@ class EmployersAddForm extends Component {
                     onChange={this.onChangeValue}/>
 
                 <button type="submit"
-                        className="btn btn-outline-light">Добавить</button>
+                        className="btn btn-outline-light">{txt}</button>
             </form>
         </div>
     )
