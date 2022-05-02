@@ -7,7 +7,8 @@ class EmployersAddForm extends Component {
         this.state = {
             name: '',
             salary: '',
-            txt: 'Добавить'
+            txt: 'Добавить',
+            background: 'blue'
         }
         
     }
@@ -36,10 +37,16 @@ class EmployersAddForm extends Component {
         })
     }
 
+    onColor = () => {
+        this.setState({
+            background: 'red'
+        })
+    }
     
 
    render() {
-       const {name, salary, txt} = this.state
+        
+        const {name, salary, txt, background} = this.state
     return (
         <div className="app-add-form"
         onSubmit = {this.onSubmit}>
@@ -60,7 +67,7 @@ class EmployersAddForm extends Component {
                     onChange={this.onChangeValue}/>
 
                 <button type="submit"
-                        className="btn btn-outline-light">{txt}</button>
+                        className="btn btn-outline-light" style={{background}} onClick={this.onColor}>{txt}</button>
             </form>
         </div>
     )
